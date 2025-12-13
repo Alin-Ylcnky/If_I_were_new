@@ -1,15 +1,15 @@
 # If I Were Project
 
 ## Overview
-A React + TypeScript + Vite application with Supabase integration for backend services. This is a creative canvas/contribution tracking application with user authentication.
+A React + TypeScript + Vite application with Supabase integration for backend services. This is a creative canvas/contribution tracking application with user authentication featuring a sophisticated dark grey premium design.
 
 ## Project Structure
 - `if_I_were_project/` - Main application directory
   - `src/` - React source code
-    - `components/` - Reusable UI components
+    - `components/` - Reusable UI components (Header, Footer, Accordion, VerticalSidebar, etc.)
     - `contexts/` - React context providers (Auth)
     - `lib/` - Utility libraries (Supabase client)
-    - `pages/` - Page components (Home, Login, Signup, etc.)
+    - `pages/` - Page components (Home, Login, Signup, Year2025, OurStory, Settings)
   - `supabase/` - Supabase functions and migrations
 
 ## Tech Stack
@@ -18,6 +18,14 @@ A React + TypeScript + Vite application with Supabase integration for backend se
 - **Backend**: Supabase (Auth, Database)
 - **Icons**: Lucide React
 - **Routing**: React Router v7
+
+## Design System
+- **Background**: Dark grey gradient (#1a1a1a to #2d2d2d) with animated blob overlay
+- **Typography**: 
+  - Headings: Cormorant Garamond (italic), color #E5E5E5
+  - Body: Manrope, color #A3A3A3
+- **Interactions**: Text glow effect on hover (.text-glow class)
+- **Layout**: Fixed vertical sidebar with rotated "COLLECTION 2025" text
 
 ## Required Environment Variables
 - `VITE_SUPABASE_URL` - Supabase project URL
