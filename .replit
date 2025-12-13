@@ -37,3 +37,9 @@ externalPort = 80
 deploymentTarget = "static"
 build = ["bash", "-c", "cd if_I_were_project && npm run build"]
 publicDir = "if_I_were_project/dist"
+
+[userenv]
+
+[userenv.shared]
+VITE_SUPABASE_URL = "https://hfwzktjtmeunakvfxeqa.supabase.co"
+VITE_SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imhmd3prdGp0bWV1bmFrdmZ4ZXFhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjAwODkyNDIsImV4cCI6MjA3NTY2NTI0Mn0.d5jV1HGOd4ECxWrDTwXRq51Y3dZ9PiX7p4EkuMloTog"
