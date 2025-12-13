@@ -88,7 +88,7 @@ export function Accordion({
                 fontFamily: "'Cormorant Garamond', serif",
                 fontStyle: 'italic',
                 fontWeight: 400,
-                color: '#A3A3A3'
+                color: '#E5E5E5'
               }}
             >
               {title || `Week ${weekNumber}`}
