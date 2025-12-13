@@ -18,13 +18,15 @@ export default defineConfig({
     },
   },
   server: {
-    port: 5173,
-    strictPort: false,
-    host: true,
+    port: 5000,
+    strictPort: true,
+    host: '0.0.0.0',
+    allowedHosts: 'all',
   },
   preview: {
-    port: 5173,
-    strictPort: false,
-    host: true,
+    port: 5000,
+    strictPort: true,
+    host: '0.0.0.0',
+    allowedHosts: 'all',
   },
 });
