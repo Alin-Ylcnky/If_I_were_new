@@ -129,7 +129,7 @@ export function Year2025() {
   if (loading || authLoading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <Loader2 size={48} className="text-gray-800 animate-spin" />
+        <Loader2 size={48} className="animate-spin" style={{ color: '#A3A3A3' }} />
       </div>
     );
   }
@@ -137,7 +137,7 @@ export function Year2025() {
   if (error) {
     return (
       <div className="flex items-center justify-center py-20">
-        <p className="text-red-600 drop-shadow-md">{error}</p>
+        <p className="drop-shadow-md" style={{ color: '#ef4444' }}>{error}</p>
       </div>
     );
   }
@@ -146,18 +146,20 @@ export function Year2025() {
     <div className="pt-24 pb-16 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16 space-y-4">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl mb-6 tracking-wide animate-fadeIn animate-float text-cyan-200 drop-shadow-2xl font-bold" style={{
-            fontFamily: 'Allura, cursive',
-            textShadow: '0 0 20px rgba(125, 211, 192, 0.8), 0 0 30px rgba(125, 211, 192, 0.5), 0 0 40px rgba(125, 211, 192, 0.3)'
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl mb-6 tracking-wide animate-fadeIn animate-float drop-shadow-2xl" style={{
+            fontFamily: "'Cormorant Garamond', serif",
+            fontStyle: 'italic',
+            fontWeight: 400,
+            color: '#E5E5E5'
           }}>
             Echoes of 2025
           </h1>
-          <p className="text-base sm:text-lg max-w-2xl mx-auto leading-relaxed text-slate-200/90 drop-shadow-lg italic" style={{ fontFamily: 'Inter, sans-serif', fontWeight: 200 }}>
+          <p className="text-base sm:text-lg max-w-2xl mx-auto leading-relaxed drop-shadow-lg" style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontWeight: 300, color: '#A3A3A3' }}>
             Unfolding selves
           </p>
         </div>
 
-        <div className="backdrop-blur-md bg-white/10 rounded-3xl shadow-2xl shadow-cyan-900/30 overflow-hidden border border-white/10">
+        <div className="card-glow backdrop-blur-md rounded-2xl shadow-2xl overflow-hidden border border-white/10" style={{ background: 'rgba(30, 30, 30, 0.6)' }}>
           {weeks.map((week) => {
             const contributionA = week.contributions.find((c) => c.contributor_type === 'A');
             const contributionB = week.contributions.find((c) => c.contributor_type === 'B');

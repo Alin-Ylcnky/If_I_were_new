@@ -4,24 +4,30 @@ export function Home() {
   return (
     <div className="flex items-center justify-center px-4 min-h-[calc(100vh-80px)]">
       <div className="text-center max-w-2xl animate-fadeIn">
-        <h1 className="text-5xl sm:text-6xl md:text-7xl text-cyan-200 mb-6 tracking-wide animate-float drop-shadow-2xl" style={{
-          fontFamily: 'Allura, cursive',
-          textShadow: '0 0 20px rgba(125, 211, 192, 0.8), 0 0 30px rgba(125, 211, 192, 0.5), 0 0 40px rgba(125, 211, 192, 0.3)'
+        <h1 className="text-5xl sm:text-6xl md:text-7xl mb-6 tracking-wide animate-float drop-shadow-2xl" style={{
+          color: '#E5E5E5'
         }}>
-          If I were...
+          <span style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontWeight: 400 }}>If I were</span>
+          <span style={{ fontFamily: "'Manrope', sans-serif", fontWeight: 700 }}>...</span>
         </h1>
         <div className="mb-12 space-y-3">
-          <p className="text-base sm:text-lg md:text-xl text-slate-200/90 leading-relaxed drop-shadow-lg italic" style={{ fontFamily: 'Inter, sans-serif', fontWeight: 200 }}>
+          <p className="text-base sm:text-lg md:text-xl leading-relaxed drop-shadow-lg" style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontWeight: 300, color: '#A3A3A3' }}>
             A mirror for the imagined self.
           </p>
-          <p className="text-base sm:text-lg md:text-xl text-slate-200/20 leading-relaxed transform scale-y-[-1] blur-[1px] drop-shadow-lg italic" style={{ fontFamily: 'Inter, sans-serif', fontWeight: 200 }} aria-hidden="true">
+          <p className="text-base sm:text-lg md:text-xl leading-relaxed transform scale-y-[-1] blur-[1px] drop-shadow-lg" style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontWeight: 300, color: 'rgba(163, 163, 163, 0.2)' }} aria-hidden="true">
             A mirror for the imagined self.
           </p>
         </div>
         <div className="flex justify-center items-center">
           <Link
             to="/2025"
-            className="inline-block px-10 py-4 bg-gradient-to-r from-teal-500/90 to-cyan-500/90 backdrop-blur-sm text-slate-100 text-lg font-semibold rounded-full hover:shadow-2xl hover:shadow-cyan-400/50 transition-all duration-300 hover:scale-110 transform border-2 border-cyan-300/50 hover:border-cyan-200"
+            className="text-glow inline-block px-10 py-4 backdrop-blur-sm text-lg rounded-full transition-all duration-300 hover:scale-105 transform border border-white/20 hover:border-white/40"
+            style={{
+              fontFamily: "'Manrope', sans-serif",
+              fontWeight: 500,
+              color: '#E5E5E5',
+              background: 'rgba(255, 255, 255, 0.05)'
+            }}
           >
             Echoes of 2025
           </Link>

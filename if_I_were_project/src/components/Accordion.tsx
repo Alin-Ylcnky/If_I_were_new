@@ -51,24 +51,23 @@ export function Accordion({
 
 
   return (
-    <div className="border-b border-gray-700 last:border-b-0 group/accordion">
+    <div className="border-b border-white/10 last:border-b-0 group/accordion">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full px-6 py-5 flex items-center justify-between hover:bg-[#0a2750]/60 transition-all duration-300 text-left group relative hover:border-l-4 hover:border-l-[#32CD32] hover:shadow-lg hover:shadow-[#A8E6A1]/20"
+        className="w-full px-6 py-5 flex items-center justify-between transition-all duration-300 text-left group relative hover:bg-white/5"
       >
         <div className="flex-1 flex items-center gap-3">
           <span
             className="text-sm uppercase tracking-wider"
             style={{
-              fontFamily: 'Inter, sans-serif',
-              fontWeight: 200,
-              color: '#7dd3c0',
-              textShadow: '0 0 12px rgba(125, 211, 192, 0.6), 0 0 20px rgba(125, 211, 192, 0.3)'
+              fontFamily: "'Manrope', sans-serif",
+              fontWeight: 500,
+              color: '#E5E5E5'
             }}
           >
             Week {weekNumber}
           </span>
-          <span className="text-gray-600">•</span>
+          <span style={{ color: '#666666' }}>•</span>
           {isEditMode && isEditingTitle ? (
             <input
               type="text"
@@ -77,21 +76,24 @@ export function Accordion({
               onBlur={handleTitleBlur}
               onKeyDown={handleTitleKeyDown}
               onClick={(e) => e.stopPropagation()}
-              className="flex-1 text-xl font-medium bg-[#081e40] text-slate-200 border border-[#2A584B] rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-[#2A584B]"
+              className="flex-1 text-xl rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-white/30 border border-white/20"
+              style={{ background: 'rgba(255, 255, 255, 0.05)', color: '#E5E5E5', fontFamily: "'Manrope', sans-serif", fontWeight: 300 }}
               autoFocus
             />
           ) : (
             <h3
-              className={`text-xl text-slate-200 ${isEditMode ? 'cursor-text hover:text-cyan-200 transition-colors' : ''}`}
+              className={`text-xl text-glow ${isEditMode ? 'cursor-text transition-colors' : ''}`}
               onClick={handleTitleClick}
               style={{
-                fontFamily: 'Inter, sans-serif',
-                fontWeight: 200
+                fontFamily: "'Cormorant Garamond', serif",
+                fontStyle: 'italic',
+                fontWeight: 400,
+                color: '#A3A3A3'
               }}
             >
               {title || `Week ${weekNumber}`}
               {isEditMode && (
-                <span className="text-sm text-gray-500 ml-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                <span className="text-sm ml-2 opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: '#666666' }}>
                   (click to edit)
                 </span>
               )}
@@ -99,9 +101,9 @@ export function Accordion({
           )}
         </div>
         {isOpen ? (
-          <ChevronUp className="text-gray-500 flex-shrink-0 transform group-hover:scale-110 transition-transform" size={24} />
+          <ChevronUp className="flex-shrink-0 transform group-hover:scale-110 transition-transform" size={24} style={{ color: '#A3A3A3' }} />
         ) : (
-          <ChevronDown className="text-gray-500 flex-shrink-0 transform group-hover:scale-110 transition-transform" size={24} />
+          <ChevronDown className="flex-shrink-0 transform group-hover:scale-110 transition-transform" size={24} style={{ color: '#A3A3A3' }} />
         )}
       </button>
 

@@ -87,49 +87,51 @@ export function Footer() {
 
   return (
     <>
-      <footer className="relative mt-auto backdrop-blur-md bg-white/5 border-t border-white/10">
+      <footer className="relative mt-auto backdrop-blur-md bg-black/20 border-t border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6">
             <div className="flex flex-col items-center sm:items-start gap-1">
-              <h3 className="text-cyan-200 text-base sm:text-lg" style={{
-                fontFamily: 'Allura, cursive',
-                textShadow: '0 0 30px rgba(125, 211, 192, 1), 0 0 50px rgba(125, 211, 192, 0.9), 0 0 70px rgba(125, 211, 192, 0.8), 0 0 90px rgba(125, 211, 192, 0.6), 0 0 110px rgba(125, 211, 192, 0.5), 0 0 130px rgba(125, 211, 192, 0.4)'
+              <h3 className="text-base sm:text-lg" style={{
+                fontFamily: "'Cormorant Garamond', serif",
+                fontStyle: 'italic',
+                fontWeight: 400,
+                color: '#E5E5E5'
               }}>
                 If I were...
               </h3>
-              <p className="text-slate-400 text-xs sm:text-sm" style={{ fontFamily: 'Inter, sans-serif', fontWeight: 200 }}>
+              <p className="text-xs sm:text-sm" style={{ fontFamily: "'Manrope', sans-serif", fontWeight: 300, color: '#A3A3A3' }}>
                 A mirror for the imagined self
               </p>
             </div>
 
-            <div className="flex flex-col items-center gap-1" style={{ fontFamily: 'Inter, sans-serif', fontWeight: 300 }}>
-              <span className="text-slate-300 text-xs sm:text-sm" style={{ fontWeight: 300, textShadow: '0 0 10px rgba(125, 211, 192, 0.3)' }}>Designed by</span>
+            <div className="flex flex-col items-center gap-1" style={{ fontFamily: "'Manrope', sans-serif", fontWeight: 300 }}>
+              <span className="text-xs sm:text-sm" style={{ fontWeight: 300, color: '#A3A3A3' }}>Designed by</span>
               <div className="flex items-center gap-1.5 flex-wrap justify-center">
-                <span className="text-white text-xs sm:text-sm" style={{
-                  fontFamily: 'Inter, sans-serif',
-                  fontWeight: 300,
-                  textShadow: '0 0 10px rgba(125, 211, 192, 0.3)'
+                <span className="text-xs sm:text-sm" style={{
+                  fontFamily: "'Manrope', sans-serif",
+                  fontWeight: 400,
+                  color: '#E5E5E5'
                 }}>
                   {settings.author_name_a || 'Dr. Alin Yalcinkaya'}
                 </span>
-                <span className="text-slate-300 text-xs sm:text-sm" style={{ fontWeight: 300 }}>&</span>
-                <span className="text-white text-xs sm:text-sm" style={{
-                  fontFamily: 'Inter, sans-serif',
-                  fontWeight: 300,
-                  textShadow: '0 0 10px rgba(125, 211, 192, 0.3)'
+                <span className="text-xs sm:text-sm" style={{ fontWeight: 300, color: '#A3A3A3' }}>&</span>
+                <span className="text-xs sm:text-sm" style={{
+                  fontFamily: "'Manrope', sans-serif",
+                  fontWeight: 400,
+                  color: '#E5E5E5'
                 }}>
                   {settings.author_name_b || 'Dr. Kelsey Virginia Dufresne'}
                 </span>
-                <span className="text-slate-300 text-xs sm:text-sm" style={{ fontWeight: 300 }}>with</span>
-                <span className="text-red-500 text-sm">♥</span>
+                <span className="text-xs sm:text-sm" style={{ fontWeight: 300, color: '#A3A3A3' }}>with</span>
+                <span className="text-sm" style={{ color: '#E5E5E5' }}>♥</span>
               </div>
             </div>
 
             <div className="flex items-center gap-4">
               <button
                 onClick={() => setShowContactForm(true)}
-                className="inline-flex items-center gap-2 text-slate-300 hover:text-white transition-colors text-xs sm:text-sm"
-                style={{ fontFamily: 'Inter, sans-serif', fontWeight: 300 }}
+                className="text-glow inline-flex items-center gap-2 transition-colors text-xs sm:text-sm"
+                style={{ fontFamily: "'Manrope', sans-serif", fontWeight: 300, color: '#A3A3A3' }}
               >
                 <Mail size={18} className="sm:w-5 sm:h-5" />
                 <span>Contact</span>
@@ -140,14 +142,16 @@ export function Footer() {
                   href={settings.instagram_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-slate-300 hover:text-cyan-200 transition-colors"
+                  className="text-glow transition-colors"
+                  style={{ color: '#A3A3A3' }}
                   aria-label="Instagram"
                 >
                   <Instagram size={18} className="sm:w-5 sm:h-5" />
                 </a>
               ) : (
                 <div
-                  className="text-slate-600 opacity-50 cursor-not-allowed"
+                  className="opacity-50 cursor-not-allowed"
+                  style={{ color: '#666666' }}
                   aria-label="Instagram (not configured)"
                 >
                   <Instagram size={18} className="sm:w-5 sm:h-5" />
@@ -155,11 +159,11 @@ export function Footer() {
               )}
             </div>
 
-            <div className="flex flex-col items-center sm:items-end gap-0.5" style={{ fontFamily: 'Inter, sans-serif' }}>
-              <p className="text-slate-400 text-sm" style={{ fontWeight: 300 }}>
+            <div className="flex flex-col items-center sm:items-end gap-0.5" style={{ fontFamily: "'Manrope', sans-serif" }}>
+              <p className="text-sm" style={{ fontWeight: 300, color: '#A3A3A3' }}>
                 © {currentYear}
               </p>
-              <p className="text-slate-400 text-xs" style={{ fontWeight: 200 }}>
+              <p className="text-xs" style={{ fontWeight: 300, color: '#666666' }}>
                 All rights reserved
               </p>
             </div>

@@ -5,6 +5,7 @@ import { Footer } from './components/Footer';
 import { CursorTracker } from './components/CursorTracker';
 import { AnimatedMeshBackground } from './components/AnimatedMeshBackground';
 import { InteractiveBlob } from './components/InteractiveBlob';
+import { VerticalSidebar } from './components/VerticalSidebar';
 import { Home } from './pages/Home';
 import { Login } from './pages/Login';
 import { Signup } from './pages/Signup';
@@ -46,8 +47,9 @@ function App() {
         >
           <AnimatedMeshBackground />
           <InteractiveBlob />
+          <VerticalSidebar />
           <div
-            className="fixed top-0 left-0 right-0 h-32 bg-gradient-to-b from-[#051e3e] to-transparent pointer-events-none"
+            className="fixed top-0 left-0 right-0 h-32 bg-gradient-to-b from-[#1a1a1a] to-transparent pointer-events-none"
             style={{ zIndex: 0 }}
           />
           <div className="relative flex flex-col min-h-screen" style={{ zIndex: 1 }}>

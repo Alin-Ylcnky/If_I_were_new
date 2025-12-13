@@ -85,27 +85,27 @@ export function Signup() {
 
   return (
     <div className="flex items-center justify-center px-4 py-20">
-      <div className="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-8 w-full max-w-md border border-gray-300 animate-fadeIn hover:shadow-[#A8E6A1]/20 transition-shadow duration-300">
-        <h2 className="font-serif text-4xl text-[#081e40] mb-2 text-center tracking-tight">
+      <div className="card-glow backdrop-blur-sm rounded-2xl p-8 w-full max-w-md border border-white/10 animate-fadeIn transition-shadow duration-300" style={{ background: 'rgba(30, 30, 30, 0.8)' }}>
+        <h2 className="text-4xl mb-2 text-center tracking-tight" style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontWeight: 500, color: '#E5E5E5' }}>
           Create Account
         </h2>
-        <p className="text-[#08402a] text-center mb-2 leading-relaxed">
+        <p className="text-center mb-2 leading-relaxed" style={{ fontFamily: "'Manrope', sans-serif", fontWeight: 400, color: '#A3A3A3' }}>
           Sign up to access your creative canvas
         </p>
-        <p className="text-gray-500 text-center mb-8 text-sm italic">
+        <p className="text-center mb-8 text-sm" style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', color: '#666666' }}>
           Only authorized emails can create an account
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           {error && (
-            <div className="bg-red-50 border border-red-200 rounded-lg p-4 flex items-start gap-3">
-              <AlertCircle className="text-red-600 mt-0.5 flex-shrink-0" size={20} />
-              <p className="text-red-800 text-sm">{error}</p>
+            <div className="rounded-lg p-4 flex items-start gap-3 border border-red-500/30" style={{ background: 'rgba(220, 38, 38, 0.1)' }}>
+              <AlertCircle className="mt-0.5 flex-shrink-0" size={20} style={{ color: '#ef4444' }} />
+              <p className="text-sm" style={{ color: '#fca5a5' }}>{error}</p>
             </div>
           )}
 
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="email" className="block text-sm mb-2" style={{ fontFamily: "'Manrope', sans-serif", fontWeight: 400, color: '#A3A3A3' }}>
               Email Address
             </label>
             <input
@@ -114,13 +114,14 @@ export function Signup() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#2A584B] focus:border-transparent outline-none transition-all"
+              className="w-full px-4 py-3 rounded-lg border border-white/20 focus:ring-2 focus:ring-white/30 focus:border-transparent outline-none transition-all"
+              style={{ background: 'rgba(255, 255, 255, 0.05)', color: '#E5E5E5', fontFamily: "'Manrope', sans-serif" }}
               placeholder="you@example.com"
             />
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="password" className="block text-sm mb-2" style={{ fontFamily: "'Manrope', sans-serif", fontWeight: 400, color: '#A3A3A3' }}>
               Password
             </label>
             <input
@@ -129,13 +130,14 @@ export function Signup() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#2A584B] focus:border-transparent outline-none transition-all"
+              className="w-full px-4 py-3 rounded-lg border border-white/20 focus:ring-2 focus:ring-white/30 focus:border-transparent outline-none transition-all"
+              style={{ background: 'rgba(255, 255, 255, 0.05)', color: '#E5E5E5', fontFamily: "'Manrope', sans-serif" }}
               placeholder="At least 6 characters"
             />
           </div>
 
           <div>
-            <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="confirmPassword" className="block text-sm mb-2" style={{ fontFamily: "'Manrope', sans-serif", fontWeight: 400, color: '#A3A3A3' }}>
               Confirm Password
             </label>
             <input
@@ -144,7 +146,8 @@ export function Signup() {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               required
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#2A584B] focus:border-transparent outline-none transition-all"
+              className="w-full px-4 py-3 rounded-lg border border-white/20 focus:ring-2 focus:ring-white/30 focus:border-transparent outline-none transition-all"
+              style={{ background: 'rgba(255, 255, 255, 0.05)', color: '#E5E5E5', fontFamily: "'Manrope', sans-serif" }}
               placeholder="Confirm your password"
             />
           </div>
@@ -152,17 +155,19 @@ export function Signup() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 bg-gradient-to-r from-[#2A584B] to-[#1f4136] text-white rounded-full font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+            className="text-glow w-full py-3 rounded-full transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed border border-white/20 hover:border-white/40 hover:scale-105 transform"
+            style={{ background: 'rgba(255, 255, 255, 0.1)', color: '#E5E5E5', fontFamily: "'Manrope', sans-serif", fontWeight: 500 }}
           >
             {loading ? 'Creating Account...' : 'Create Account'}
           </button>
 
           <div className="text-center mt-4">
-            <p className="text-gray-600 text-sm">
+            <p className="text-sm" style={{ fontFamily: "'Manrope', sans-serif", color: '#A3A3A3' }}>
               Already have an account?{' '}
               <Link
                 to="/login"
-                className="text-[#2A584B] hover:text-[#1f4136] font-semibold transition-colors"
+                className="text-glow transition-colors"
+                style={{ color: '#E5E5E5', fontWeight: 500 }}
               >
                 Login
               </Link>
