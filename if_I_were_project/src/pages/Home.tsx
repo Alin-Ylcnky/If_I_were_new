@@ -5,10 +5,10 @@ export function Home() {
     <div className="flex items-center justify-center px-4 min-h-[calc(100vh-80px)]">
       <div className="text-center max-w-2xl animate-fadeIn">
         <h1 className="text-5xl sm:text-6xl md:text-7xl mb-6 tracking-wide animate-float drop-shadow-2xl" style={{
-          color: '#E5E5E5'
-        }}>
-          <span style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontWeight: 400 }}>If I were</span>
-          <span style={{ fontFamily: "'Manrope', sans-serif", fontWeight: 700 }}>...</span>
+            color: '#E879F9'
+          }}>
+            <span style={{ fontFamily: "'Italiana', sans-serif", fontWeight: 400 }}>If I were</span>
+            <span style={{ fontFamily: "'Manrope', sans-serif", fontWeight: 700 }}>...</span>
         </h1>
         <div className="mb-12 space-y-3">
           <p className="text-base sm:text-lg md:text-xl leading-relaxed drop-shadow-lg" style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontWeight: 300, color: '#A3A3A3' }}>
