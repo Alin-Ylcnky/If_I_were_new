@@ -7,7 +7,7 @@ export function Home() {
         <h1 className="text-5xl sm:text-6xl md:text-7xl mb-6 tracking-wide animate-float drop-shadow-2xl" style={{
             color: '#E879F9'
           }}>
-            <span style={{ fontFamily: "'Poiret One', sans-serif", fontWeight: 400 }}>If I were</span>
+            <span style={{ fontFamily: "'Italiana', sans-serif", fontWeight: 400 }}>If I were</span>
             <span style={{ fontFamily: "'Manrope', sans-serif", fontWeight: 700 }}>...</span>
         </h1>
         <div className="mb-12 space-y-3">
@@ -23,7 +23,7 @@ export function Home() {
             to="/2025"
             className="inline-block px-12 py-4 text-xl rounded-full transition-all duration-300 hover:scale-105 border border-fuchsia-400 shadow-[0_0_15px_rgba(232,121,249,0.3)] hover:shadow-[0_0_30px_rgba(232,121,249,0.6)] backdrop-blur-md bg-black/20"
             style={{
-              fontFamily: "'Italiana', sans-serif",
+              fontFamily: "'Poiret One', sans-serif",
               color: '#E879F9'
             }}
           >
