@@ -15,7 +15,7 @@ export function Home() {
             color: '#E879F9'
           }}>
             <span className="pr-2" style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 300, fontStyle: 'italic' }}>If I were</span>
-            <span style={{ fontFamily: "'Manrope', sans-serif", fontWeight: 300 }}>...</span>
+            <span style={{ fontFamily: "'Manrope', sans-serif", fontWeight: 100 }}>...</span>
         </h1>
 
         {/* SUBTITLE SECTION: Manrope (Matches "Collection 2025" sidebar text) 
