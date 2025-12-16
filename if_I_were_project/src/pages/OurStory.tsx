@@ -232,7 +232,8 @@ export function OurStory() {
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-16">
           {/* TITLE: Matches Home Page (Cormorant, Italic, Light, Fuchsia) */}
-          <h1 className="text-5xl sm:text-6xl md:text-7xl mb-6 tracking-wide animate-fadeIn drop-shadow-2xl" style={{
+          {/* TITLE: Added 'animate-float' to match Home page motion */}
+          <h1 className="text-5xl sm:text-6xl md:text-7xl mb-6 tracking-wide animate-fadeIn animate-float drop-shadow-2xl" style={{
             fontFamily: "'Cormorant Garamond', serif",
             fontWeight: 300,
             fontStyle: 'italic',
