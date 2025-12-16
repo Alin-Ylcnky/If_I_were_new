@@ -55,7 +55,7 @@ export function Home() {
             style={{
               fontFamily: "'Manrope', serif",
               fontStyle: 'italic',
-              fontWeight: 400,
+              fontWeight: 300,
               textTransform: 'uppercase',
               letterSpacing: '0.1em',
               color: '#E879F9'
