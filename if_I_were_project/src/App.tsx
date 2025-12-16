@@ -50,7 +50,7 @@ function App() {
           <InteractiveBlob />
           <VerticalSidebar />
           <div
-            className="fixed top-0 left-0 right-0 h-32 bg-gradient-to-b from-[#1a1a1a] to-transparent pointer-events-none"
+            className="fixed top-0 left-0 right-0 h-32 bg-gradient-to-b from-[#0f0f0f] to-transparent pointer-events-none"
             style={{ zIndex: 0 }}
           />
           <div className="relative flex flex-col min-h-screen" style={{ zIndex: 1 }}>
