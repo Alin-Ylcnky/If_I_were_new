@@ -21,12 +21,10 @@ export function Home() {
         <div className="flex justify-center items-center">
           <Link
             to="/2025"
-            className="text-glow inline-block px-10 py-4 backdrop-blur-sm text-lg rounded-full transition-all duration-300 hover:scale-105 transform border border-white/20 hover:border-white/40"
+            className="inline-block px-12 py-4 text-xl rounded-full transition-all duration-300 hover:scale-105 border border-fuchsia-400 shadow-[0_0_15px_rgba(232,121,249,0.3)] hover:shadow-[0_0_30px_rgba(232,121,249,0.6)] backdrop-blur-md bg-black/20"
             style={{
-              fontFamily: "'Manrope', sans-serif",
-              fontWeight: 500,
-              color: '#E5E5E5',
-              background: 'rgba(255, 255, 255, 0.05)'
+              fontFamily: "'Italiana', sans-serif",
+              color: '#E879F9'
             }}
           >
             Echoes of 2025
