@@ -21,9 +21,10 @@ export function Home() {
         <div className="flex justify-center items-center">
           <Link
             to="/2025"
-            className="inline-block px-12 py-4 text-xl rounded-full transition-all duration-300 hover:scale-105 border border-fuchsia-400 shadow-[0_0_15px_rgba(232,121,249,0.3)] hover:shadow-[0_0_30px_rgba(232,121,249,0.6)] backdrop-blur-md bg-black/20"
+            className="inline-block px-12 py-4 text-xl rounded-full transition-all duration-300 hover:scale-105 border border-fuchsia-400 shadow-[0_0_15px_rgba(232,121,249,0.3)] hover:shadow-[0_0_30px_rgba(232,121,249,0.6)] backdrop-blur-md bg-black/40"
             style={{
-              fontFamily: "'Italiana', sans-serif",
+              fontFamily: "'Marcellus', serif",
+              fontWeight: 400,
               color: '#E879F9'
             }}
           >
