@@ -10,10 +10,10 @@ color: '#E879F9'
 <span style={{ fontFamily: "'Manrope', sans-serif", fontWeight: 700 }}>...</span>
 </h1>
 <div className="mb-12 space-y-3">
-<p className="text-base sm:text-lg md:text-xl leading-relaxed drop-shadow-lg" style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontWeight: 300, color: '#A3A3A3' }}>
+<p className="text-base sm:text-lg md:text-xl leading-relaxed drop-shadow-lg" style={{ fontFamily: "'Marcellus', serif", fontStyle: 'italic', fontWeight: 300, color: '#faf6f6ff' }}>
 A mirror for the imagined self.
 </p>
-<p className="text-base sm:text-lg md:text-xl leading-relaxed transform scale-y-[-1] blur-[1px] drop-shadow-lg" style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontWeight: 300, color: 'rgba(163, 163, 163, 0.2)' }} aria-hidden="true">
+<p className="text-base sm:text-lg md:text-xl leading-relaxed transform scale-y-[-1] blur-[1px] drop-shadow-lg" style={{ fontFamily: "'Marcellus', serif", fontStyle: 'italic', fontWeight: 300, color: 'rgba(209, 201, 201, 0.2)' }} aria-hidden="true">
 A mirror for the imagined self.
 </p>
 </div>
