@@ -23,27 +23,27 @@ export function Home() {
         <div className="mb-12 space-y-2 flex flex-col items-center w-full">
           
           {/* Primary Text */}
-          <p className="text-lg sm:text-xl md:text-2xl leading-relaxed drop-shadow-lg" style={{ 
-            fontFamily: "'Manrope', sans-serif", 
-            fontStyle: 'italic',
-            color: '#E5E5E5', 
-            fontWeight: 300,
-            letterSpacing: '0.05em'
-          }}>
-            A mirror for the imagined self.
-          </p>
-          
-          {/* Reflection Effect */}
-          <p className="text-lg sm:text-xl md:text-2xl leading-relaxed transform scale-y-[-1] blur-[0.5px] select-none" style={{ 
-            fontFamily: "'Manrope', sans-serif", 
-            fontStyle: 'italic',
-            color: '#E879F9', 
-            opacity: 0.25, 
-            fontWeight: 300,
-            letterSpacing: '0.05em'
-          }} aria-hidden="true">
-            A mirror for the imagined self.
-          </p>
+<p className="text-sm sm:text-base leading-relaxed drop-shadow-lg" style={{ 
+  fontFamily: "'Manrope', sans-serif", 
+  fontStyle: 'italic',
+  color: '#E5E5E5', 
+  fontWeight: 200, // Extra Light for elegance
+  letterSpacing: '0.05em'
+}}>
+  A mirror for the imagined self.
+</p>
+
+{/* Reflection */}
+<p className="text-sm sm:text-base leading-relaxed transform scale-y-[-1] blur-[0.5px] select-none" style={{ 
+  fontFamily: "'Manrope', sans-serif", 
+  fontStyle: 'italic',
+  color: '#E879F9', 
+  opacity: 0.25, 
+  fontWeight: 200,
+  letterSpacing: '0.05em'
+}} aria-hidden="true">
+  A mirror for the imagined self.
+</p>
         </div>
 
         {/* ACTION BUTTON: Cormorant Garamond (Matches Title) 
