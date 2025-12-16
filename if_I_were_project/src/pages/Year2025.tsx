@@ -149,12 +149,12 @@ export function Year2025() {
           <h1 className="text-4xl sm:text-5xl lg:text-6xl mb-6 tracking-wide animate-fadeIn animate-float drop-shadow-2xl" style={{
             fontFamily: "'Cormorant Garamond', serif",
             fontStyle: 'italic',
-            fontWeight: 400,
+            fontWeight: 100,
             color: '#E5E5E5'
           }}>
             Echoes of 2025
           </h1>
-          <p className="text-base sm:text-lg max-w-2xl mx-auto leading-relaxed drop-shadow-lg" style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontWeight: 300, color: '#A3A3A3' }}>
+          <p className="text-base sm:text-lg max-w-2xl mx-auto leading-relaxed drop-shadow-lg" style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontWeight: 200, color: '#E5E5E5' }}>
             Unfolding selves
           </p>
         </div>
