@@ -135,9 +135,11 @@ export function OurStory() {
     return (
       <div className="pt-24 pb-16 px-4">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl mb-6 tracking-wide animate-fadeIn text-cyan-200 drop-shadow-2xl" style={{
-            fontFamily: 'Allura, cursive',
-            textShadow: '0 0 20px rgba(125, 211, 192, 0.8), 0 0 30px rgba(125, 211, 192, 0.5), 0 0 40px rgba(125, 211, 192, 0.3)'
+          <h1 className="text-5xl sm:text-6xl md:text-7xl mb-6 tracking-wide animate-fadeIn drop-shadow-2xl" style={{
+            fontFamily: "'Cormorant Garamond', serif",
+            fontWeight: 100,
+            fontStyle: 'italic',
+            color: '#E879F9'
           }}>
             Our Story
           </h1>
