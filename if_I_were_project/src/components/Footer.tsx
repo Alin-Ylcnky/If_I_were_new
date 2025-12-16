@@ -123,7 +123,7 @@ export function Footer() {
                   {settings.author_name_b || 'Dr. Kelsey Virginia Dufresne'}
                 </span>
                 <span className="text-xs sm:text-sm" style={{ fontWeight: 300, color: '#A3A3A3' }}>with</span>
-                <span className="text-sm" style={{ color: '#E5E5E5' }}>♥</span>
+                <span className="text-sm" style={{ color: '#A11248' }}>♥</span>
               </div>
             </div>
 
