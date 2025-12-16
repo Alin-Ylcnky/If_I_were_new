@@ -35,7 +35,6 @@ export function OurStory() {
 
       if (fetchError) throw fetchError;
 
-
       setImages(data || []);
     } catch {
       setError('Failed to load images');
@@ -131,13 +130,15 @@ export function OurStory() {
     );
   }
 
+  // EMPTY STATE
   if (images.length === 0 && isAuthorized) {
     return (
       <div className="pt-24 pb-16 px-4">
         <div className="max-w-4xl mx-auto text-center">
+          {/* TITLE: Matches Home Page */}
           <h1 className="text-5xl sm:text-6xl md:text-7xl mb-6 tracking-wide animate-fadeIn drop-shadow-2xl" style={{
             fontFamily: "'Cormorant Garamond', serif",
-            fontWeight: 100,
+            fontWeight: 300,
             fontStyle: 'italic',
             color: '#E879F9'
           }}>
@@ -146,7 +147,7 @@ export function OurStory() {
           <p className="text-slate-200/90 mb-8 text-lg">No content yet. Add your first entry to get started!</p>
           <button
             onClick={() => setIsAdding(true)}
-            className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#2A584B] to-[#1f4136] text-white rounded-full hover:shadow-lg transform hover:scale-105 transition-all duration-200"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-fuchsia-600 to-purple-700 text-white rounded-full hover:shadow-lg transform hover:scale-105 transition-all duration-200"
           >
             <Plus size={20} />
             <span>Add Content</span>
@@ -162,7 +163,7 @@ export function OurStory() {
                     value={newImageUrl}
                     onChange={(e) => setNewImageUrl(e.target.value)}
                     placeholder="https://example.com/image.jpg"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2A584B] focus:border-transparent outline-none"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fuchsia-500 focus:border-transparent outline-none"
                   />
                 </div>
                 <div>
@@ -172,7 +173,7 @@ export function OurStory() {
                     onChange={(e) => setNewCaption(e.target.value)}
                     placeholder="Add a caption..."
                     rows={2}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2A584B] focus:border-transparent outline-none resize-none"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fuchsia-500 focus:border-transparent outline-none resize-none"
                   />
                 </div>
                 <div>
@@ -188,7 +189,7 @@ export function OurStory() {
                   <select
                     value={newImageSize}
                     onChange={(e) => setNewImageSize(e.target.value)}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2A584B] focus:border-transparent outline-none"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fuchsia-500 focus:border-transparent outline-none"
                   >
                     <option value="300px">Small (300px)</option>
                     <option value="400px">Medium (400px)</option>
@@ -200,7 +201,7 @@ export function OurStory() {
                 <div className="flex gap-3">
                   <button
                     onClick={handleAddImage}
-                    className="flex-1 px-4 py-2 bg-gradient-to-r from-[#2A584B] to-[#1f4136] text-white rounded-lg hover:shadow-lg transition-all"
+                    className="flex-1 px-4 py-2 bg-gradient-to-r from-fuchsia-600 to-purple-700 text-white rounded-lg hover:shadow-lg transition-all"
                   >
                     Add Content
                   </button>
@@ -225,17 +226,28 @@ export function OurStory() {
     );
   }
 
+  // MAIN CONTENT STATE
   return (
     <div className="pt-24 pb-16 px-4">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-16">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl mb-6 tracking-wide animate-fadeIn text-cyan-200 drop-shadow-2xl" style={{
-            fontFamily: 'Allura, cursive',
-            textShadow: '0 0 20px rgba(125, 211, 192, 0.8), 0 0 30px rgba(125, 211, 192, 0.5), 0 0 40px rgba(125, 211, 192, 0.3)'
+          {/* TITLE: Matches Home Page (Cormorant, Italic, Light, Fuchsia) */}
+          <h1 className="text-5xl sm:text-6xl md:text-7xl mb-6 tracking-wide animate-fadeIn drop-shadow-2xl" style={{
+            fontFamily: "'Cormorant Garamond', serif",
+            fontWeight: 300,
+            fontStyle: 'italic',
+            color: '#E879F9'
           }}>
             Our Story
           </h1>
-          <p className="text-base sm:text-lg max-w-2xl mx-auto leading-relaxed text-slate-200/90 drop-shadow-lg italic" style={{ fontFamily: 'Inter, sans-serif', fontWeight: 200 }}>
+          {/* SUBTITLE: Matches Home Page (Manrope, Italic, Extra Light) */}
+          <p className="text-sm sm:text-base max-w-2xl mx-auto leading-relaxed drop-shadow-lg" style={{ 
+            fontFamily: "'Manrope', sans-serif", 
+            fontStyle: 'italic', 
+            fontWeight: 200, 
+            color: '#E5E5E5',
+            letterSpacing: '0.05em'
+          }}>
             Captured moments, shared memories
           </p>
         </div>
@@ -244,7 +256,7 @@ export function OurStory() {
           <div className="mb-12 text-center">
             <button
               onClick={() => setIsAdding(!isAdding)}
-              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#2A584B] to-[#1f4136] text-white rounded-full hover:shadow-lg transform hover:scale-105 transition-all duration-200"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-fuchsia-600 to-purple-700 text-white rounded-full hover:shadow-lg transform hover:scale-105 transition-all duration-200"
             >
               <Plus size={20} />
               <span>{isAdding ? 'Cancel' : 'Add Content'}</span>
@@ -262,7 +274,7 @@ export function OurStory() {
                   value={newImageUrl}
                   onChange={(e) => setNewImageUrl(e.target.value)}
                   placeholder="https://example.com/image.jpg"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2A584B] focus:border-transparent outline-none"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fuchsia-500 focus:border-transparent outline-none"
                 />
               </div>
               <div>
@@ -272,7 +284,7 @@ export function OurStory() {
                   onChange={(e) => setNewCaption(e.target.value)}
                   placeholder="Add a caption..."
                   rows={2}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2A584B] focus:border-transparent outline-none resize-none"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fuchsia-500 focus:border-transparent outline-none resize-none"
                 />
               </div>
               <div>
@@ -286,7 +298,7 @@ export function OurStory() {
               <button
                 onClick={handleAddImage}
                 disabled={!newImageUrl.trim() && !newTextContent.trim()}
-                className="w-full px-4 py-2 bg-gradient-to-r from-[#2A584B] to-[#1f4136] text-white rounded-lg hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full px-4 py-2 bg-gradient-to-r from-fuchsia-600 to-purple-700 text-white rounded-lg hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Add Content
               </button>
@@ -331,7 +343,7 @@ export function OurStory() {
                       <textarea
                         value={editCaption}
                         onChange={(e) => setEditCaption(e.target.value)}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2A584B] focus:border-transparent outline-none resize-none"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fuchsia-500 focus:border-transparent outline-none resize-none"
                         rows={2}
                       />
                     </div>
@@ -348,7 +360,7 @@ export function OurStory() {
                       <select
                         value={editImageSize}
                         onChange={(e) => setEditImageSize(e.target.value)}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2A584B] focus:border-transparent outline-none"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fuchsia-500 focus:border-transparent outline-none"
                       >
                         <option value="300px">Small (300px)</option>
                         <option value="400px">Medium (400px)</option>
@@ -360,7 +372,7 @@ export function OurStory() {
                     <div className="flex gap-3">
                       <button
                         onClick={() => handleUpdateCaption(image.id, editCaption, editTextContent, editImageSize)}
-                        className="flex items-center gap-2 px-4 py-2 bg-[#2A584B] text-white rounded-lg hover:bg-[#1f4136] transition-colors"
+                        className="flex items-center gap-2 px-4 py-2 bg-fuchsia-700 text-white rounded-lg hover:bg-fuchsia-800 transition-colors"
                       >
                         <Save size={16} />
                         Save
@@ -386,7 +398,7 @@ export function OurStory() {
                     className={isAuthorized ? 'cursor-pointer' : ''}
                   >
                     {image.caption && (
-                      <h2 className={`text-xl sm:text-2xl font-semibold mb-4 text-white/95 text-center drop-shadow-lg ${isAuthorized ? 'hover:text-cyan-200' : ''} transition-colors`}>
+                      <h2 className={`text-xl sm:text-2xl font-semibold mb-4 text-white/95 text-center drop-shadow-lg ${isAuthorized ? 'hover:text-fuchsia-300' : ''} transition-colors`}>
                         {image.caption}
                       </h2>
                     )}
