@@ -7,7 +7,7 @@ export function Home() {
         <h1 className="text-5xl sm:text-6xl md:text-7xl mb-6 tracking-wide animate-float drop-shadow-2xl" style={{
             color: '#E879F9'
           }}>
-            <span style={{ fontFamily: "'Italiana', sans-serif", fontWeight: 400 }}>If I were</span>
+            <span style={{ fontFamily: "'Poiret One', sans-serif", fontWeight: 400 }}>If I were</span>
             <span style={{ fontFamily: "'Manrope', sans-serif", fontWeight: 700 }}>...</span>
         </h1>
         <div className="mb-12 space-y-3">
