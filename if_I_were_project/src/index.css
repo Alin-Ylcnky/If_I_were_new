@@ -56,7 +56,7 @@
     @apply antialiased;
     font-family: 'Manrope', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     font-feature-settings: "kern" 1, "liga" 1;
-    color: #5a5757;
+    color: #222121;
   }
 
   h1, h2, h3, h4, h5, h6 {
