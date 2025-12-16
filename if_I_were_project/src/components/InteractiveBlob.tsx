@@ -13,6 +13,7 @@ interface Blob {
 }
 
 export function InteractiveBlob() {
+  // REFS FOR BACKGROUND BLOBS
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [, forceUpdate] = useState({});
   const blobsStateRef = useRef<Blob[]>([
@@ -51,6 +52,37 @@ export function InteractiveBlob() {
     }
   ]);
 
+  // REFS FOR SHOOTING STAR CURSOR
+  const headRef = useRef<HTMLDivElement>(null);
+  const tailRef = useRef<HTMLDivElement>(null);
+
+  // 1. CURSOR EFFECT (SHOOTING STAR)
+  useEffect(() => {
+    const handlePointerMove = (e: PointerEvent) => {
+      const { clientX, clientY } = e;
+
+      // The Head (Star) - Fast
+      if (headRef.current) {
+        headRef.current.animate(
+          { left: `${clientX}px`, top: `${clientY}px` },
+          { duration: 100, fill: "forwards" }
+        );
+      }
+
+      // The Tail (Trail) - Slow
+      if (tailRef.current) {
+        tailRef.current.animate(
+          { left: `${clientX}px`, top: `${clientY}px` },
+          { duration: 1200, fill: "forwards" }
+        );
+      }
+    };
+
+    window.addEventListener('pointermove', handlePointerMove);
+    return () => window.removeEventListener('pointermove', handlePointerMove);
+  }, []);
+
+  // 2. BACKGROUND BLOBS ANIMATION (CANVAS)
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -135,20 +167,25 @@ export function InteractiveBlob() {
         const y = blob.y * canvas.height;
         const radius = blob.size;
 
-        ctx.filter = 'blur(40px)';
+        // Increased blur for softer, dreamy look
+        ctx.filter = 'blur(60px)';
 
         const gradient = ctx.createRadialGradient(x, y, 0, x, y, radius);
 
+        // --- UPDATED COLORS TO MATCH FUCHSIA/PURPLE THEME ---
+        
         if (blob.isPaused) {
-          gradient.addColorStop(0, 'rgba(255, 200, 50, 0.9)');
-          gradient.addColorStop(0.3, 'rgba(255, 150, 80, 0.7)');
-          gradient.addColorStop(0.6, 'rgba(255, 100, 100, 0.4)');
-          gradient.addColorStop(1, 'rgba(255, 80, 120, 0)');
+          // Paused State: Gold/Mystical White (Frozen in time)
+          gradient.addColorStop(0, 'rgba(255, 255, 255, 0.9)');
+          gradient.addColorStop(0.3, 'rgba(250, 204, 21, 0.7)');
+          gradient.addColorStop(0.6, 'rgba(234, 179, 8, 0.4)');
+          gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
         } else {
-          gradient.addColorStop(0, 'rgba(50, 255, 180, 0.9)');
-          gradient.addColorStop(0.3, 'rgba(80, 220, 255, 0.7)');
-          gradient.addColorStop(0.6, 'rgba(100, 180, 255, 0.4)');
-          gradient.addColorStop(1, 'rgba(120, 150, 255, 0)');
+          // Active State: Fuchsia, Deep Purple, Violet
+          gradient.addColorStop(0, 'rgba(232, 121, 249, 0.9)');   // Bright Fuchsia center
+          gradient.addColorStop(0.3, 'rgba(192, 132, 252, 0.7)'); // Purple
+          gradient.addColorStop(0.6, 'rgba(147, 51, 234, 0.4)');  // Deep Violet
+          gradient.addColorStop(1, 'rgba(107, 33, 168, 0)');      // Transparent Fade
         }
 
         ctx.fillStyle = gradient;
@@ -156,12 +193,13 @@ export function InteractiveBlob() {
         ctx.arc(x, y, radius, 0, Math.PI * 2);
         ctx.fill();
 
+        // Pulsing effect when paused
         if (blob.isPaused) {
           const pulseSize = radius + Math.sin(blob.floatOffset * 2) * 5;
-          ctx.filter = 'blur(20px)';
+          ctx.filter = 'blur(30px)';
           const pulseGradient = ctx.createRadialGradient(x, y, 0, x, y, pulseSize);
-          pulseGradient.addColorStop(0, 'rgba(255, 220, 100, 0.3)');
-          pulseGradient.addColorStop(1, 'rgba(255, 200, 50, 0)');
+          pulseGradient.addColorStop(0, 'rgba(255, 255, 255, 0.3)');
+          pulseGradient.addColorStop(1, 'rgba(250, 204, 21, 0)');
           ctx.fillStyle = pulseGradient;
           ctx.beginPath();
           ctx.arc(x, y, pulseSize, 0, Math.PI * 2);
@@ -182,10 +220,28 @@ export function InteractiveBlob() {
   }, []);
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="fixed inset-0 cursor-pointer"
-      style={{ zIndex: 0 }}
-    />
+    <div className="fixed inset-0 z-0">
+      
+      {/* 1. BACKGROUND CANVAS (Blobs) */}
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 cursor-pointer"
+        style={{ zIndex: 0 }}
+      />
+
+      {/* 2. SHOOTING STAR CURSOR (Overlay) */}
+      <div className="pointer-events-none">
+         {/* The Tail */}
+        <div
+            ref={tailRef}
+            className="absolute w-[200px] h-[200px] bg-fuchsia-600 rounded-full mix-blend-screen filter blur-[60px] opacity-20 transform -translate-x-1/2 -translate-y-1/2"
+        />
+        {/* The Head */}
+        <div
+            ref={headRef}
+            className="absolute w-2 h-2 bg-white rounded-full shadow-[0_0_15px_rgba(255,255,255,0.9)] transform -translate-x-1/2 -translate-y-1/2"
+        />
+      </div>
+    </div>
   );
 }
