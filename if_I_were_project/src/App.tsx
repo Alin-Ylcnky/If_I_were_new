@@ -44,6 +44,7 @@ function App() {
           className="min-h-screen relative"
           onContextMenu={handleContextMenu}
           onKeyDown={handleKeyDown}
+          style={{ background: 'linear-gradient(to bottom, #0f0f0f, #000000)' }}
         >
           <AnimatedMeshBackground />
           <InteractiveBlob />
