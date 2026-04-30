@@ -1,130 +1,82 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
-import { supabase } from '../lib/supabase';
-import type { User, Session } from '@supabase/supabase-js';
+import { api } from '../lib/api';
 
 type AuthContextType = {
-  user: User | null;
-  session: Session | null;
+  user: { id: string; email: string } | null;
   isAuthorized: boolean;
   loading: boolean;
   signIn: (email: string, password: string, rememberMe?: boolean) => Promise<{ error: Error | null }>;
+  signUp: (email: string, password: string) => Promise<{ error: Error | null }>;
   signOut: () => Promise<void>;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
-  const [session, setSession] = useState<Session | null>(null);
+  const [user, setUser] = useState<{ id: string; email: string } | null>(null);
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  const checkAuthorization = async (userEmail: string | undefined) => {
-    if (!userEmail) {
+  const fetchMe = async () => {
+    const token = localStorage.getItem('auth_token');
+    if (!token) {
+      setUser(null);
       setIsAuthorized(false);
+      setLoading(false);
       return;
     }
 
     try {
-      const { data, error } = await supabase
-        .from('authorized_users')
-        .select('email')
-        .eq('email', userEmail)
-        .maybeSingle();
-
-      if (error) {
-        console.error('Authorization check error:', error);
-        setIsAuthorized(false);
-        return;
-      }
-
-      const isAuth = data !== null;
-      console.log('Authorization check for', userEmail, ':', isAuth);
-      setIsAuthorized(isAuth);
+      const data = await api.get<{ user: { id: string; email: string } }>('/api/auth/me', { auth: true });
+      setUser(data.user);
+      setIsAuthorized(true);
     } catch (err) {
-      console.error('Unexpected error during authorization check:', err);
+      console.error('Session validation failed:', err);
+      localStorage.removeItem('auth_token');
+      setUser(null);
       setIsAuthorized(false);
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setUser(session?.user ?? null);
-      if (session?.user?.email) {
-        checkAuthorization(session.user.email).finally(() => setLoading(false));
-      } else {
-        setIsAuthorized(false);
-        setLoading(false);
-      }
-    });
-
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      (async () => {
-        setSession(session);
-        setUser(session?.user ?? null);
-        if (session?.user?.email) {
-          await checkAuthorization(session.user.email);
-        } else {
-          setIsAuthorized(false);
-        }
-      })();
-    });
-
-    return () => subscription.unsubscribe();
+    fetchMe();
   }, []);
 
   const signIn = async (email: string, password: string, rememberMe = true) => {
     try {
-      console.log('Attempting sign in for:', email);
-
-      const { data, error } = await supabase.auth.signInWithPassword({
+      const data = await api.post<{ token: string; user: { id: string; email: string } }>('/api/auth/login', {
         email,
         password,
+        rememberMe,
       });
-
-      if (error) {
-        console.error('Sign in error from Supabase:', error);
-        return { error };
-      }
-
-      console.log('Sign in successful, session created');
-
-      if (!rememberMe && data.session) {
-        sessionStorage.setItem('creative-canvas-session', JSON.stringify(data.session));
-        localStorage.removeItem('creative-canvas-auth');
-      }
-
-      if (data.user?.email) {
-        await checkAuthorization(data.user.email);
-
-        const { data: authData } = await supabase
-          .from('authorized_users')
-          .select('email')
-          .eq('email', data.user.email)
-          .maybeSingle();
-
-        if (!authData) {
-          await supabase.auth.signOut();
-          return { error: new Error('This account is not authorized to access this application. Please contact the administrator.') };
-        }
-      }
-
+      localStorage.setItem('auth_token', data.token);
+      setUser(data.user);
+      setIsAuthorized(true);
       return { error: null };
     } catch (err) {
-      console.error('Unexpected error during sign in:', err);
       return { error: err instanceof Error ? err : new Error('Unknown error occurred') };
     }
   };
 
+  const signUp = async (email: string, password: string) => {
+    try {
+      await api.post('/api/auth/signup', { email, password });
+      return { error: null };
+    } catch (err) {
+      return { error: err instanceof Error ? err : new Error('Unknown error occurred') };
+    }
+  };
 
   const signOut = async () => {
-    await supabase.auth.signOut();
+    localStorage.removeItem('auth_token');
+    setUser(null);
     setIsAuthorized(false);
   };
 
   return (
-    <AuthContext.Provider value={{ user, session, isAuthorized, loading, signIn, signOut }}>
+    <AuthContext.Provider value={{ user, isAuthorized, loading, signIn, signUp, signOut }}>
       {children}
     </AuthContext.Provider>
   );

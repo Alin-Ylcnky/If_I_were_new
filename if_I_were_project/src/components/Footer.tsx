@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Instagram, Mail, Send } from 'lucide-react';
-import { supabase } from '../lib/supabase';
+import { api } from '../lib/api';
 
 interface SiteSettings {
   instagram_url?: string;
@@ -26,15 +26,7 @@ export function Footer() {
 
   const loadSettings = async () => {
     try {
-      const { data, error } = await supabase
-        .from('site_settings')
-        .select('setting_key, setting_value, is_active')
-        .eq('is_active', true);
-
-      if (error) {
-        console.error('Error loading settings:', error);
-        return;
-      }
+      const { settings: data } = await api.get<{ settings: Array<{ setting_key: string; setting_value: string }> }>('/api/public/settings');
 
       if (data) {
         const settingsObj: SiteSettings = {};
@@ -56,32 +48,13 @@ export function Footer() {
     setSubmitStatus('idle');
 
     try {
-      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-      const contactApiUrl =
-        import.meta.env.VITE_CONTACT_API_URL ||
-        `${supabaseUrl}/functions/v1/send-contact-email`;
-
-      const response = await fetch(contactApiUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          ...(import.meta.env.VITE_SUPABASE_ANON_KEY
-            ? { Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}` }
-            : {}),
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        setSubmitStatus('success');
-        setFormData({ name: '', email: '', message: '' });
-        setTimeout(() => {
-          setShowContactForm(false);
-          setSubmitStatus('idle');
-        }, 2000);
-      } else {
-        setSubmitStatus('error');
-      }
+      await api.post('/api/contact', formData);
+      setSubmitStatus('success');
+      setFormData({ name: '', email: '', message: '' });
+      setTimeout(() => {
+        setShowContactForm(false);
+        setSubmitStatus('idle');
+      }, 2000);
     } catch {
       setSubmitStatus('error');
     } finally {

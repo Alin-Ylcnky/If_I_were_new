@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { AlertCircle } from 'lucide-react';
-import { supabase } from '../lib/supabase';
+import { useAuth } from '../contexts/AuthContext';
 
 export function Signup() {
   const [email, setEmail] = useState('');
@@ -10,6 +10,7 @@ export function Signup() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { signUp } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,45 +29,9 @@ export function Signup() {
     setLoading(true);
 
     try {
-      console.log('Checking authorization for email:', email);
-
-      const { data: authData, error: authError } = await supabase
-        .from('authorized_users')
-        .select('email')
-        .eq('email', email.toLowerCase().trim())
-        .maybeSingle();
-
-      if (authError) {
-        console.error('Authorization check error:', authError);
-        setError('Unable to verify authorization. Please try again or contact the site administrator.');
-        setLoading(false);
-        return;
-      }
-
-      if (!authData) {
-        console.log('Email not found in authorized_users table');
-        setError('This email is not authorized to create an account. Please contact the site administrator.');
-        setLoading(false);
-        return;
-      }
-
-      console.log('Email is authorized, proceeding with signup');
-
-      const { error: signUpError } = await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-          emailRedirectTo: window.location.origin + '/login',
-        },
-      });
-
+      const { error: signUpError } = await signUp(email, password);
       if (signUpError) {
-        console.error('Signup error:', signUpError);
-        if (signUpError.message.includes('already registered') || signUpError.message.includes('User already registered')) {
-          setError('This email is already registered. Please login instead.');
-        } else {
-          setError(signUpError.message || 'Failed to create account. Please try again.');
-        }
+        setError(signUpError.message || 'Failed to create account. Please try again.');
         setLoading(false);
         return;
       }

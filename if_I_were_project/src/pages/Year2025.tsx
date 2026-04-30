@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Loader2 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
-import { supabase } from '../lib/supabase';
-import type { Week, Contribution } from '../lib/supabase';
+import { api } from '../lib/api';
+import type { Week, Contribution } from '../lib/types';
 import { Accordion } from '../components/Accordion';
 import { WeekContribution } from '../components/WeekContribution';
 
@@ -29,10 +29,7 @@ export function Year2025() {
 
   const loadAuthorNames = async () => {
     try {
-      const { data } = await supabase
-        .from('site_settings')
-        .select('setting_key, setting_value')
-        .in('setting_key', ['author_name_a', 'author_name_b']);
+      const { settings: data } = await api.get<{ settings: Array<{ setting_key: string; setting_value: string }> }>('/api/public/settings');
 
       if (data) {
         const names: AuthorNames = { author_name_a: 'Alin', author_name_b: 'Kelsey' };
@@ -52,24 +49,7 @@ export function Year2025() {
 
   const loadWeeks = async () => {
     try {
-      const { data: weeksData, error: weeksError } = await supabase
-        .from('weeks')
-        .select('*')
-        .order('week_number', { ascending: true });
-
-      if (weeksError) throw weeksError;
-
-      const { data: contributionsData, error: contributionsError } = await supabase
-        .from('contributions')
-        .select('*');
-
-      if (contributionsError) throw contributionsError;
-
-      const weeksWithContributions = weeksData.map((week) => ({
-        ...week,
-        contributions: contributionsData.filter((c) => c.week_id === week.id),
-      }));
-
+      const { weeks: weeksWithContributions } = await api.get<{ weeks: WeekWithContributions[] }>('/api/weeks-with-contributions');
       setWeeks(weeksWithContributions);
     } catch {
       setError('Failed to load weeks');
@@ -82,17 +62,7 @@ export function Year2025() {
     contributionId: string,
     updates: Partial<Contribution>
   ) => {
-    const { error } = await supabase
-      .from('contributions')
-      .update({
-        ...updates,
-        updated_at: new Date().toISOString(),
-      })
-      .eq('id', contributionId);
-
-    if (error) {
-      throw new Error('Failed to save contribution');
-    }
+    await api.put(`/api/contributions/${contributionId}`, updates, { auth: true });
 
     setWeeks((prevWeeks) =>
       prevWeeks.map((week) => ({
@@ -108,12 +78,7 @@ export function Year2025() {
 
   const handleUpdateWeekTitle = async (weekId: string, title: string) => {
     try {
-      const { error } = await supabase
-        .from('weeks')
-        .update({ title })
-        .eq('id', weekId);
-
-      if (error) throw error;
+      await api.put(`/api/weeks/${weekId}/title`, { title }, { auth: true });
 
       setWeeks((prevWeeks) =>
         prevWeeks.map((week) =>

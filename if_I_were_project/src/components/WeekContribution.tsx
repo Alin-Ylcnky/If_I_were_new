@@ -4,7 +4,7 @@ import { RichTextEditor } from './RichTextEditor';
 import { RichTextDisplay } from './RichTextDisplay';
 import { ImageUrlInput } from './ImageUrlInput';
 import { ImageDisplay } from './ImageDisplay';
-import type { Contribution } from '../lib/supabase';
+import type { Contribution } from '../lib/types';
 
 type WeekContributionProps = {
   contribution: Contribution;

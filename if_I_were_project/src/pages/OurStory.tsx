@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Loader2, Plus, Save, Trash2, GripVertical } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
-import { supabase } from '../lib/supabase';
-import type { OurStoryImage } from '../lib/supabase';
+import { api } from '../lib/api';
+import type { OurStoryImage } from '../lib/types';
 import { ImageDisplay } from '../components/ImageDisplay';
 import { RichTextEditor } from '../components/RichTextEditor';
 import { RichTextDisplay } from '../components/RichTextDisplay';
@@ -28,12 +28,7 @@ export function OurStory() {
 
   const loadImages = async () => {
     try {
-      const { data, error: fetchError } = await supabase
-        .from('our_story_images')
-        .select('*')
-        .order('display_order', { ascending: true });
-
-      if (fetchError) throw fetchError;
+      const { images: data } = await api.get<{ images: OurStoryImage[] }>('/api/our-story');
 
       setImages(data || []);
     } catch {
@@ -51,20 +46,13 @@ export function OurStory() {
 
     try {
       const maxOrder = images.length > 0 ? Math.max(...images.map(img => img.display_order)) : -1;
-
-      const { data, error: insertError } = await supabase
-        .from('our_story_images')
-        .insert({
-          image_url: newImageUrl.trim() || null,
-          caption: newCaption,
-          text_content: newTextContent,
-          image_size: newImageSize,
-          display_order: maxOrder + 1,
-        })
-        .select()
-        .single();
-
-      if (insertError) throw insertError;
+      const data = await api.post<OurStoryImage>('/api/our-story', {
+        image_url: newImageUrl.trim() || null,
+        caption: newCaption,
+        text_content: newTextContent,
+        image_size: newImageSize,
+        display_order: maxOrder + 1,
+      }, { auth: true });
 
       if (data) {
         setImages([...images, data]);
@@ -81,12 +69,11 @@ export function OurStory() {
 
   const handleUpdateCaption = async (id: string, caption: string, textContent: string, imageSize: string) => {
     try {
-      const { error: updateError } = await supabase
-        .from('our_story_images')
-        .update({ caption, text_content: textContent, image_size: imageSize, updated_at: new Date().toISOString() })
-        .eq('id', id);
-
-      if (updateError) throw updateError;
+      await api.put(`/api/our-story/${id}`, {
+        caption,
+        text_content: textContent,
+        image_size: imageSize,
+      }, { auth: true });
 
       setImages(images.map(img =>
         img.id === id ? { ...img, caption, text_content: textContent, image_size: imageSize, updated_at: new Date().toISOString() } : img
@@ -101,12 +88,7 @@ export function OurStory() {
     if (!confirm('Are you sure you want to delete this image?')) return;
 
     try {
-      const { error: deleteError } = await supabase
-        .from('our_story_images')
-        .delete()
-        .eq('id', id);
-
-      if (deleteError) throw deleteError;
+      await api.delete(`/api/our-story/${id}`, { auth: true });
 
       setImages(images.filter(img => img.id !== id));
     } catch {

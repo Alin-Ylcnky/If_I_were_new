@@ -2,14 +2,8 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Save, Mail, Instagram, Type, User } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
-import { supabase } from '../lib/supabase';
-
-interface SettingItem {
-  id: string;
-  setting_key: string;
-  setting_value: string;
-  is_active: boolean;
-}
+import { api } from '../lib/api';
+import type { SettingItem } from '../lib/types';
 
 export function Settings() {
   const { isAuthorized } = useAuth();
@@ -29,12 +23,7 @@ export function Settings() {
 
   const loadSettings = async () => {
     try {
-      const { data, error } = await supabase
-        .from('site_settings')
-        .select('*')
-        .order('setting_key');
-
-      if (error) throw error;
+      const { settings: data } = await api.get<{ settings: SettingItem[] }>('/api/settings', { auth: true });
       setSettings(data || []);
     } catch {
       setSettings([]);
@@ -58,18 +47,7 @@ export function Settings() {
     setSaveStatus('idle');
 
     try {
-      for (const setting of settings) {
-        const { error } = await supabase
-          .from('site_settings')
-          .update({
-            setting_value: setting.setting_value,
-            is_active: setting.is_active,
-            updated_at: new Date().toISOString(),
-          })
-          .eq('id', setting.id);
-
-        if (error) throw error;
-      }
+      await api.put('/api/settings/bulk', { settings }, { auth: true });
 
       setSaveStatus('success');
       setTimeout(() => setSaveStatus('idle'), 3000);
