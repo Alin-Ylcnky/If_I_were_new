@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
-import { useNavigate, useLocation, Link } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { AlertCircle, CheckCircle } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 
 export function Login() {
-  const [email, setEmail] = useState('');
+  const [loginId, setLoginId] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(true);
   const [error, setError] = useState('');
@@ -36,19 +36,11 @@ export function Login() {
     try {
       localStorage.setItem('rememberMe', rememberMe.toString());
 
-      const { error } = await signIn(email, password, rememberMe);
+      const { error } = await signIn(loginId, password, rememberMe);
 
       if (error) {
         console.error('Login error:', error);
-        if (error.message.includes('Invalid login credentials')) {
-          setError('Invalid credentials. Please check your email and password.');
-        } else if (error.message.includes('Email not confirmed')) {
-          setError('Please verify your email address before signing in. Check your inbox for a confirmation link.');
-        } else if (error.message.includes('not authorized')) {
-          setError('This account is not authorized to access this application. Please contact the administrator.');
-        } else {
-          setError(error.message || 'Login failed. Please try again.');
-        }
+        setError(error.message || 'Login failed. Please try again.');
         setLoading(false);
       } else {
         navigate('/2025');
@@ -89,18 +81,18 @@ export function Login() {
           )}
 
           <div>
-            <label htmlFor="email" className="block text-sm mb-2" style={{ fontFamily: "'Manrope', sans-serif", fontWeight: 400, color: '#A3A3A3' }}>
-              Email Address
+            <label htmlFor="loginId" className="block text-sm mb-2" style={{ fontFamily: "'Manrope', sans-serif", fontWeight: 400, color: '#A3A3A3' }}>
+              User ID
             </label>
             <input
-              id="email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              id="loginId"
+              type="text"
+              value={loginId}
+              onChange={(e) => setLoginId(e.target.value)}
               required
               className="w-full px-4 py-3 rounded-lg border border-white/20 focus:ring-2 focus:ring-white/30 focus:border-transparent outline-none transition-all"
               style={{ background: 'rgba(255, 255, 255, 0.05)', color: '#E5E5E5', fontFamily: "'Manrope', sans-serif" }}
-              placeholder="you@example.com"
+              placeholder="Alin or Kelsey"
             />
           </div>
 
@@ -143,18 +135,6 @@ export function Login() {
             {loading ? 'Signing in...' : 'Sign In'}
           </button>
 
-          <div className="text-center mt-4">
-            <p className="text-sm" style={{ fontFamily: "'Manrope', sans-serif", color: '#A3A3A3' }}>
-              Don't have an account?{' '}
-              <Link
-                to="/signup"
-                className="text-glow transition-colors"
-                style={{ color: '#E5E5E5', fontWeight: 500 }}
-              >
-                Sign up
-              </Link>
-            </p>
-          </div>
         </form>
       </div>
     </div>

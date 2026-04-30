@@ -8,7 +8,6 @@ import { InteractiveBlob } from './components/InteractiveBlob';
 import { VerticalSidebar } from './components/VerticalSidebar';
 import { Home } from './pages/Home';
 import { Login } from './pages/Login';
-import { Signup } from './pages/Signup';
 import { Year2025 } from './pages/Year2025';
 import { Settings } from './pages/Settings';
 import { OurStory } from './pages/OurStory';
@@ -60,7 +59,6 @@ function App() {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<Signup />} />
                 <Route path="/2025" element={<Year2025 />} />
                 <Route path="/our-story" element={<OurStory />} />
                 <Route path="/settings" element={<Settings />} />

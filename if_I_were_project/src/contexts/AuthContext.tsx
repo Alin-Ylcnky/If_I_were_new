@@ -6,7 +6,6 @@ type AuthContextType = {
   isAuthorized: boolean;
   loading: boolean;
   signIn: (email: string, password: string, rememberMe?: boolean) => Promise<{ error: Error | null }>;
-  signUp: (email: string, password: string) => Promise<{ error: Error | null }>;
   signOut: () => Promise<void>;
 };
 
@@ -60,15 +59,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const signUp = async (email: string, password: string) => {
-    try {
-      await api.post('/api/auth/signup', { email, password });
-      return { error: null };
-    } catch (err) {
-      return { error: err instanceof Error ? err : new Error('Unknown error occurred') };
-    }
-  };
-
   const signOut = async () => {
     localStorage.removeItem('auth_token');
     setUser(null);
@@ -76,7 +66,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, isAuthorized, loading, signIn, signUp, signOut }}>
+    <AuthContext.Provider value={{ user, isAuthorized, loading, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   );

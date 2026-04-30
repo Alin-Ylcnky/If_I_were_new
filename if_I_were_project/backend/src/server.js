@@ -30,6 +30,20 @@ function signToken(user) {
   return jwt.sign({ userId: user.id, email: user.email }, JWT_SECRET, { expiresIn: '7d' });
 }
 
+async function upsertFixedUser(loginId, password) {
+  const passwordHash = await bcrypt.hash(password, 10);
+  const existing = await pool.query('SELECT id FROM users WHERE LOWER(email) = LOWER($1)', [loginId]);
+  if (existing.rowCount) {
+    await pool.query('UPDATE users SET email = $1, password_hash = $2 WHERE id = $3', [
+      loginId,
+      passwordHash,
+      existing.rows[0].id,
+    ]);
+  } else {
+    await pool.query('INSERT INTO users (email, password_hash) VALUES ($1, $2)', [loginId, passwordHash]);
+  }
+}
+
 async function authMiddleware(req, res, next) {
   const authorization = req.headers.authorization || '';
   const token = authorization.replace('Bearer ', '');
@@ -126,40 +140,23 @@ async function initializeDatabase() {
       );
     }
   }
+
+  // Lock authentication to these two accounts.
+  await upsertFixedUser('Alin', 'albatros');
+  await upsertFixedUser('Kelsey', 'kelsey');
 }
 
 app.get('/healthz', (_req, res) => res.status(200).json({ ok: true }));
 
 app.post('/api/auth/signup', async (req, res) => {
-  try {
-    const email = String(req.body?.email || '').trim().toLowerCase();
-    const password = String(req.body?.password || '');
-    if (!email || password.length < 6) return res.status(400).json({ error: 'Invalid email or password' });
-
-    const authzCount = await pool.query('SELECT COUNT(*)::int AS count FROM authorized_users');
-    if (authzCount.rows[0].count > 0) {
-      const authz = await pool.query('SELECT id FROM authorized_users WHERE email = $1', [email]);
-      if (!authz.rowCount) return res.status(403).json({ error: 'This email is not authorized to create an account.' });
-    } else {
-      await pool.query('INSERT INTO authorized_users (email) VALUES ($1) ON CONFLICT (email) DO NOTHING', [email]);
-    }
-
-    const exists = await pool.query('SELECT id FROM users WHERE email = $1', [email]);
-    if (exists.rowCount) return res.status(409).json({ error: 'This email is already registered.' });
-
-    const passwordHash = await bcrypt.hash(password, 10);
-    await pool.query('INSERT INTO users (email, password_hash) VALUES ($1, $2)', [email, passwordHash]);
-    return res.status(201).json({ success: true });
-  } catch {
-    return res.status(500).json({ error: 'Failed to sign up' });
-  }
+  return res.status(403).json({ error: 'New account registration is disabled.' });
 });
 
 app.post('/api/auth/login', async (req, res) => {
   try {
-    const email = String(req.body?.email || '').trim().toLowerCase();
+    const email = String(req.body?.email || '').trim();
     const password = String(req.body?.password || '');
-    const result = await pool.query('SELECT id, email, password_hash FROM users WHERE email = $1', [email]);
+    const result = await pool.query('SELECT id, email, password_hash FROM users WHERE LOWER(email) = LOWER($1)', [email]);
     if (!result.rowCount) return res.status(401).json({ error: 'Invalid credentials' });
     const user = result.rows[0];
     const ok = await bcrypt.compare(password, user.password_hash);
