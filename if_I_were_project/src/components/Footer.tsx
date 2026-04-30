@@ -57,11 +57,17 @@ export function Footer() {
 
     try {
       const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-      const response = await fetch(`${supabaseUrl}/functions/v1/send-contact-email`, {
+      const contactApiUrl =
+        import.meta.env.VITE_CONTACT_API_URL ||
+        `${supabaseUrl}/functions/v1/send-contact-email`;
+
+      const response = await fetch(contactApiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+          ...(import.meta.env.VITE_SUPABASE_ANON_KEY
+            ? { Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}` }
+            : {}),
         },
         body: JSON.stringify(formData),
       });
