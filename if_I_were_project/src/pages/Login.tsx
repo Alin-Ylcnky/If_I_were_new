@@ -92,7 +92,7 @@ export function Login() {
               required
               className="w-full px-4 py-3 rounded-lg border border-white/20 focus:ring-2 focus:ring-white/30 focus:border-transparent outline-none transition-all"
               style={{ background: 'rgba(255, 255, 255, 0.05)', color: '#E5E5E5', fontFamily: "'Manrope', sans-serif" }}
-              placeholder="Alin or Kelsey"
+              placeholder="Enter your user ID"
             />
           </div>
 
