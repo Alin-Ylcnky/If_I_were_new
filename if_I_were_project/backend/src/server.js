@@ -5,6 +5,11 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { Pool } from 'pg';
 
+//NEW LINES FROM GEMINI\
+import path from 'path';
+import { fileURLToPath } from 'url';
+//NEW LINES FROM GEMINI
+
 dotenv.config();
 
 const { PORT = 8080, DATABASE_URL, JWT_SECRET, FRONTEND_ORIGIN } = process.env;
@@ -273,6 +278,18 @@ app.post('/api/contact', async (req, res) => {
   }
 });
 
+//NEW LINES FROM GEMINI
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const frontendDistPath = path.join(__dirname, '../../dist');
+
+app.use(express.static(frontendDistPath));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(frontendDistPath, 'index.html'));
+});
+//NEW LINES FROM GEMINI
 initializeDatabase()
   .then(() => {
     app.listen(PORT, () => {
