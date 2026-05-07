@@ -83,7 +83,7 @@ export function Footer() {
               </p>
             </div>
 
-            <div className="flex flex-col items-center gap-1" style={{ fontFamily: "'Manrope', sans-serif", fontWeight: 300 }}>
+           <div className="flex flex-col items-center gap-1" style={{ fontFamily: "'Manrope', sans-serif", fontWeight: 300 }}>
               <span className="text-xs sm:text-sm" style={{ fontWeight: 300, color: '#A3A3A3' }}>Designed by</span>
               <div className="flex items-center gap-1.5 flex-wrap justify-center">
                 <span className="text-xs sm:text-sm" style={{
@@ -91,7 +91,7 @@ export function Footer() {
                   fontWeight: 400,
                   color: '#E5E5E5'
                 }}>
-                  {settings.author_name_a || 'Dr. Alin Yalcinkaya'}
+                  Dr. Alin Yalcinkaya
                 </span>
                 <span className="text-xs sm:text-sm" style={{ fontWeight: 300, color: '#A3A3A3' }}>&</span>
                 <span className="text-xs sm:text-sm" style={{
@@ -99,7 +99,7 @@ export function Footer() {
                   fontWeight: 400,
                   color: '#E5E5E5'
                 }}>
-                  {settings.author_name_b || 'Dr. Kelsey Virginia Dufresne'}
+                  Dr. Kelsey Virginia Dufresne
                 </span>
                 <span className="text-xs sm:text-sm" style={{ fontWeight: 300, color: '#A3A3A3' }}>with</span>
                 <span className="text-sm" style={{ color: '#A11248' }}>♥</span>
